@@ -1,0 +1,4 @@
+# .dockerignore
+
+# Skip the .env file
+.env
