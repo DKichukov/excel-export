@@ -1,5 +1,5 @@
 services:
-  mysql:
+  db:
     image: 'mysql:8.0.30'
     environment:
       - 'MYSQL_DATABASE=${MYSQL_DATABASE}'
