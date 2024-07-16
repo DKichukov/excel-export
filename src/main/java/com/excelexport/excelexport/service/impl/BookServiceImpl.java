@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -19,9 +19,9 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    private static void fillTable(List<Book> books, HSSFSheet sheet, int dataRowInitialIndex) {
+    private static void fillTable(List<Book> books, XSSFSheet sheet, int dataRowInitialIndex) {
         for (Book book : books) {
-            HSSFRow dataRow = sheet.createRow(dataRowInitialIndex);
+            XSSFRow dataRow = sheet.createRow(dataRowInitialIndex);
             dataRow.createCell(0).setCellValue(book.getId());
             dataRow.createCell(1).setCellValue(book.getName());
             dataRow.createCell(2).setCellValue(book.getGenre());
@@ -33,7 +33,7 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-    private static void writeFile(HttpServletResponse response, HSSFWorkbook workbook) {
+    private static void writeFile(HttpServletResponse response, XSSFWorkbook workbook) {
         try {
             ServletOutputStream outputStream = response.getOutputStream();
             workbook.write(outputStream);
@@ -49,9 +49,9 @@ public class BookServiceImpl implements BookService {
 
         List<Book> books = bookRepository.findAll();
 
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("Books Info");
-        HSSFRow row = sheet.createRow(0);
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Books Info");
+        XSSFRow row = sheet.createRow(0);
 
         row.createCell(0).setCellValue("ID");
         row.createCell(1).setCellValue("Name");

@@ -16,10 +16,10 @@ public class BookController {
 
     @GetMapping("/excel")
     public void generateExcelFile(HttpServletResponse response) {
-        response.setContentType("application/octet-stream");
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=books.xls";
+        String headerValue = "attachment; filename=books.xlsx";
 
         response.setHeader(headerKey, headerValue);
 
